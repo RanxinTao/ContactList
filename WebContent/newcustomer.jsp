@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,38 +8,26 @@
 <title>Add a new customer</title>
 </head>
 <body>
-
-	<%
-		Object msg = request.getAttribute("message");
-		if(msg != null) {
-	%>
-			<br>
-			<font color="red"><%= msg %></font>
-			<br><br>
-	<%
-		}
-		
-		String name = request.getParameter("name");
-		String address = request.getParameter("address");
-		String phone = request.getParameter("phone");
-	%>
+	
+	<c:if test="${requestScope.message != null }">
+		<br>
+		<font color="red">${requestScope.message }</font>
+		<br><br>
+	</c:if>
 
 	<form action="addCustomer.do" method="post">
 		<table>
 			<tr>
 				<td>Customer Name:</td>
-				<td><input type="text" name="name" 
-					value="<%= name == null ? "" : name %>"/></td>
+				<td><input type="text" name="name" value="${param.name }"/></td>
 			</tr>
 			<tr>
 				<td>Address:</td>
-				<td><input type="text" name="address"
-					value="<%= address == null ? "" : address %>"/></td>
+				<td><input type="text" name="address" value="${param.address }"/></td>
 			</tr>
 			<tr>
 				<td>Phone:</td>
-				<td><input type="text" name="phone"
-					value="<%= phone == null ? "" : phone %>"/></td>
+				<td><input type="text" name="phone" value="${param.phone }"/></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Submit"></td>
